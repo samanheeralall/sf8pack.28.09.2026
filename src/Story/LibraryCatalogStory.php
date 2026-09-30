@@ -2,6 +2,7 @@
 
 namespace App\Story;
 
+use App\Factory\AuthorFactory;
 use App\Factory\BookFactory;
 use App\Factory\GenreFactory;
 use Zenstruck\Foundry\Attribute\AsFixture;
@@ -21,6 +22,7 @@ final class LibraryCatalogStory extends Story
                 'title'           => $book['title'],
                 'isbn'            => $book['isbn'],
                 'publicationDate' => $book['publicationDate'],
+                'authors'         => [AuthorFactory::findOrCreate(['name' => $book['author']])],
                 'genres'          => array_map(
                     static fn (string $name) => GenreFactory::findOrCreate(['name' => $name]),
                     $book['genres'],
