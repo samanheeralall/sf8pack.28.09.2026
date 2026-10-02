@@ -5,22 +5,39 @@
 {% block body %}
     <h1>Our collection ({{ books|length }} books)</h1>
 
-    <div class="book-grid">
-        {% for book in books %}
-            <div class="book-card">
-                <h2>
-                    <a href="{{ path('app_book_show', { id : book.id }) }}">
-                        {{ book.title }}
-                    </a>
-                </h2>
-                <p>
-                    {{ book.authors|map(a => a.name)|join(', ') }}
-                    {{ book.publicationDate|date('Y') }}
-                </p>
-                <a href="{{ path('app_admin_book_edit', {id: book.id}) }}" class="btn btn-outline-secondary">
-                    Edit
-                </a>
-            </div>
-        {% endfor %}
+    <div class="listing-layout">
+
+        <aside class="listing-sidebar">
+            <h2>Filter</h2>
+            {{ form_start(form) }}
+            {{ form_row(form.q) }}
+            {{ form_row(form.author) }}
+            {{ form_row(form.available) }}
+
+            <button type="submit">Search</button>
+            {{ form_end(form) }}
+        </aside>
+
+        <div class="book-grid">
+            {% for book in books %}
+                <div class="book-card">
+                    <h2>
+                        <a href="{{ path('app_book_show', {id: book.id}) }}">
+                            {{ book.title }}
+                        </a>
+                    </h2>
+                    <p>
+                        {{ book.authors|map(a => a.name)|join(', ') }}
+                        &mdash; {{ book.publicationDate|date('Y') }}
+                    </p>
+                    {% if is_granted('book.edit_details', book) %}
+                        <a href="{{ path('app_admin_book_edit', {id: book.id}) }}" class="btn btn-outline-secondary">
+                            Edit
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
     </div>
 {% endblock %}

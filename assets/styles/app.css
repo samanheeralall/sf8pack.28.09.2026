@@ -263,3 +263,207 @@ form select.is-invalid {
     color: #0c5460;
     border-color: #bee5eb;
 }
+/* Append to assets/styles/app.css */
+
+/* Auth pages — login & registration card */
+.auth-card {
+    max-width: 420px;
+    margin: 3rem auto;
+    padding: 2rem 2.25rem;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.auth-card h1 {
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #111;
+}
+
+.auth-card form {
+    margin: 0;
+}
+
+.auth-card .auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.auth-card .auth-footer a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.auth-card .auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Admin pages — listing & header */
+.admin-page {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.admin-page .admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.admin-page .admin-header h1 {
+    margin: 0;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.admin-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table-actions {
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+}
+
+/* Header — auth-aware nav (extends the dark header from ch02) */
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+header nav .user-menu {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+header nav .user-menu .user-email {
+    color: #d1d5db;
+    font-style: italic;
+}
+/* Append to assets/styles/app.css */
+
+/* ch06 styled type="text|email|url|date|number" — extend to type="search" */
+form input[type="search"] {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+form input[type="search"]:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+/* Sort bar above the listing */
+.sort-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.sort-bar a,
+.pagination a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.sort-bar a:hover,
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+/* Pagination control under the listing */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Listing with a left sidebar (filter panel + main results) */
+.listing-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.listing-sidebar {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1.25rem 1rem;
+    align-self: start;
+}
+
+.listing-sidebar h2 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.listing-sidebar form > div {
+    margin-bottom: 0.85rem;
+}
+
+.listing-sidebar form button[type="submit"] {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.listing-main {
+    min-width: 0; /* prevent grid blowout when content is wide */
+}
+
+/* Stack on narrow viewports */
+@media (max-width: 720px) {
+    .listing-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
