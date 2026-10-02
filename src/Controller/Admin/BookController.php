@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Security\Permission\BookPermission;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,8 +31,16 @@ class BookController extends AbstractController
         ?Book $book = null,
     ): Response {
         $isNew = $book === null;
+
+        $isNew ? $this->denyAccessUnlessGranted('ROLE_LIBRARIAN') : $this->denyAccessUnlessGranted(BookPermission::EDIT_DETAILS, $book);
+
         $book ??= new Book();
-        $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BookType::class, $book, [
+            'can_change_availability' => $this->isGranted(
+                BookPermission::CHANGE_AVAILABILITY,
+                $book
+            ),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
